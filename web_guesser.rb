@@ -1,8 +1,17 @@
 require 'sinatra'
 require 'sinatra/reloader'
 
-SECRET_NUMBER = rand(101)
-$correct_guess = false
+SECRET_NUMBER = 1 + rand(99)
+$correct = false
+
+
+get '/' do
+  guess = params["guess"]
+  message = check_guess(guess)
+  bg_color = css_color(message)
+
+  erb :index, :locals => { :number => SECRET_NUMBER, :message => message, :correct_guess => $correct, :bg_color => bg_color }
+end
 
 def check_guess(guess)
   @guess = guess.to_i
@@ -18,14 +27,16 @@ def check_guess(guess)
   elsif @guess < SECRET_NUMBER
     "Too low!"
   elsif @guess == SECRET_NUMBER
-    $correct_guess = true
+    $correct = true
     "You got it right!"
   end
 end
 
-get '/' do
-  guess = params["guess"]
-  message = check_guess(guess)
-
-  erb :index, :locals => { :number => SECRET_NUMBER, :message => message, :correct_guess => $correct_guess }
+def css_color(message)
+  case message
+  when "Way too high!" then "#FFFFFF"
+  when "Too high!" then "#FF9473"
+  when "Way too low!" then "#FF9473"
+  when "Too low!" then "#FF9473"
+  end
 end
