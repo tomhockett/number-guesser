@@ -1,5 +1,5 @@
 require 'sinatra'
-require 'sinatra/reloader'
+require 'sinatra/reloader' if development?
 
 SECRET_NUMBER = 1 + rand(99)
 $correct = false
