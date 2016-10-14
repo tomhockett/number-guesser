@@ -1,13 +1,22 @@
 <html>
-  <head></head>
-  <body style="background: <%= bg_color %>">
-    <form>
-      <input type="text" name="guess">
-      <input type="submit" valut="Guess!">
-      <%= message %>
-    </form>
-    <% if correct_guess %>
-      <p>The SECRET NUMBER IS <%= number %></p>
-    <% end %>
-  </body>
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="<%= url('style.css') %>" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+<div class="jumbotron">
+  <div class="container">
+    <h1>Let's play a game!</h1>
+    <p><%= message %></p>
+      <form>
+        <input type="text" name="guess">
+        <input type="submit" valut="Guess!" class="btn btn-default">
+      </form>
+      <% if correct_guess %>
+        <p>The SECRET NUMBER IS <%= number %></p>
+      <% end %>
+      </h1>
+  </div>
+</div>  </body>
 </html>
